@@ -9,8 +9,6 @@
         <div class="position-relative">
             <div class="container-fluid top-main">
             </div>
-            <div class="title-wrapper p-2 py-4">
-            </div>
             <div class="img-comic-wrapper position-absolute">
                 <img src="{{ $comic->thumb }}" alt="{{ $comic->title}}">
             </div>
@@ -80,6 +78,16 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                    <div class="text-center pt-5 ">
+                        <h3 class=" pb-3">
+                            Non trovi il tuo comic?
+                        </h3>
+                        <a href="{{route('comics.create')}}">
+                            <button class="btn btn-primary rounded-0">
+                                Aggiungilo
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
