@@ -42,19 +42,30 @@
                     @foreach ($comics as $comic)
                         <div class="ms-4 pb-4">
                             <div class="card-wrapper">
-                                <a href="{{route('comics.show', $comic->id)}}">
-                                    <div class="img-card-wrapper">
-                                        <img src="{{$comic->thumb}}" alt="{{$comic->title}}">
+                                <div class="position-relative">
+                                    {{-- bottone di delete --}}
+                                    <div class=" position-absolute icons-position">
+                                        <form action="{{route('comics.destroy', $comic->id)}}" method="POST" class="mb-3">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger border-0 rounded-0">
+                                                <i class="fa-solid fa-trash text-light" style="font-size: 0.8rem"></i>
+                                            </button>
+                                        </form>
+                                        <a href="{{route('comics.edit', $comic->id)}}">
+                                            <button class="btn btn-success rounded-0 border-0">
+                                                <i class="fa-solid fa-pen" style="font-size: 0.7rem"></i>
+                                            </button>
+                                        </a>
                                     </div>
-                                </a>
-                                {{-- bottone di delete --}}
-                                <form action="{{route('comics.destroy', $comic->id)}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger ">
-                                        Elimina
-                                    </button>
-                                </form>
+                                    {{-- immagine di copertina --}}
+                                    <a href="{{route('comics.show', $comic->id)}}" class="cover-card">
+                                        <div class="img-card-wrapper">
+                                            <img src="{{$comic->thumb}}" alt="{{$comic->title}}">
+                                        </div>
+                                    </a>
+
+                                </div>
                                 <div>
                                     <p class="font-my-light text-center pt-3">
                                         {{$comic->series}}

@@ -9,10 +9,10 @@
         <div class="position-relative">
             <div class="container-fluid top-main">
             </div>
-            <div class="title-wrapper p-3 px-4 position-absolute ">
-                <h4 class="font-my-light">
-                    Modifica: {{$comic->id}}
-                </h4>
+            <div class="title-wrapper p-3 px-4 position-absolute">
+                <h3 class="font-my-light">
+                    {{$comic->title}}
+                </h3>
             </div>
         </div>
         <div>
@@ -28,6 +28,9 @@
                     {{-- e tramite la funzione @method()d i laravel imposterò il metodo giusto --}}
                     @method('PUT')
                     {{-- creo una serie di input per ogni campo del db --}}
+                    <h2 class="text-center">
+                        Applica le tue modifiche
+                    </h2>
                     <div class="d-flex justify-content-center py-3">
                         <div class="pe-5">
                             <div class="mb-3 ">
@@ -58,12 +61,14 @@
                         </div>
                         <div>
                             <label for="description" class="form-label">Trama</label>
-                            <textarea class="form-control" placeholder="Lasciaci una descrizione della trama..." value="{{old('description', $comic->description)}}" id="description" name="description" rows="20" cols="60"></textarea>
+                            <textarea class="form-control" placeholder="Lasciaci una descrizione della trama..." id="description" name="description" rows="20" cols="60">
+                                {{old('description', $comic->description)}}
+                            </textarea>
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class=" btn btn-primary rounded-0 mt-5">
-                            Aggiungi
+                        <button type="submit" class=" btn btn-success rounded-0 mt-5 border-0">
+                            Modifica
                         </button>
                     </div>
                 </form>

@@ -16,9 +16,17 @@
         <div class="container">
             <div class="row py-5 my-3">
                 <div class="col-8">
-                    <h2>
-                        {{ $comic->title }}
-                    </h2>
+                    <div class="d-flex justify-content-between pb-4">
+                        <h2>
+                            {{ $comic->title }}
+                        </h2>
+                        {{-- bottone di edit --}}
+                        <a href="{{route('comics.edit', $comic->id)}}">
+                            <button class="btn btn-success rounded-0 border-0">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </a>
+                    </div>
                     <div class="bg-success p-4 d-flex justify-content-between">
                         <div class="d-flex justify-content-between w-75">
                             <div class="text-light">
@@ -78,12 +86,8 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="{{route('comics.edit', $comic->id)}}">
-                            <button class="btn btn-primary rounded-0">
-                                Modifica
-                            </button>
-                        </a>
                     </div>
+                    {{-- bottone di create --}}
                     <div class="text-center pt-5 ">
                         <h3 class=" pb-3">
                             Non trovi il tuo comic?
