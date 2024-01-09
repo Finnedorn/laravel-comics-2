@@ -5,6 +5,9 @@
     <div class="container d-flex justify-content-between py-3">
       <!--logo-->
       <div class="logo-wrapper">
+        {{-- ogni volta che importo un'immagine statica e che quindi per praticità inserisco in resources>img --}}
+        {{-- è necessario che la importi tramite un collegamento Vite altrimenti essa non verrà letta --}}
+        {{--la dicitura è la seguente:  Vite::asset('resources/img/nomefile') --}}
         <a href="{{route('home')}}"><img src="{{Vite::asset('resources/img/dc-logo.png')}}" alt="dc-logo"></a>
       </div>
       <!--navbar-->

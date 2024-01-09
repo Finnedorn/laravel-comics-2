@@ -68,7 +68,7 @@ npm install
 
 # inserisco i dati per il collegamento al db in env
 
-
+-------------
 
 # metodo CRUD (sezione resource controller sulla pagina di laravel)
 
@@ -86,8 +86,10 @@ php artisan make:controller NomeController --resources
 
 
 # controllo le routes per capire se il CRUD è ben impostato
+# (è importante pure per esaminare i nomi delle route oltre che metodi con cui i dati vengono inviati!)
 php artisan route:list --except-vendor
 
+---------------
 
 # altrimenti
 
@@ -122,6 +124,7 @@ use App\Http\Controllers\NomeController;
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 
 # controllo le routes per capire se le rotte sono ben impostate
+# (è importante pure per esaminare i nomi delle route oltre che metodi con cui i dati vengono inviati!)
 php artisan route:list --except-vendor
 
 

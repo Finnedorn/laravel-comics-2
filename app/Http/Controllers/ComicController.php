@@ -50,23 +50,46 @@ class ComicController extends Controller
         // è decretata alla riga 41 e presente come paramtro della funzione store
         // dd($request->all());
 
+
+        // voglio che per alcuni campi siano rispettati dei paratri o dei limiti
+        // (sopratutto che coincidano coi limiti di lunghezze che ho impostato per i vari campi del migration in db)
+        // tramite la funzione validate([]) posso andare a specificare quali limiti impostare
+        // prima di inviare i dati del $formData al db
+        $request->validate([
+            'title'=> 'required|min:5|max:255',
+            'price'=> 'required|min:1|max:20',
+            'series'=> 'required|min:5|max:30',
+        ]);
+
         // come per i seeder creo un pacchetto che associ
         // ogni elemento dell'array seeder destinato al db
-        // ad un elemento dell'array associativo generato dal form
+        // ad un elemento dell'array associativo generato dal form ($formData)
         $formData= $request->all();
-        $newComic = new Comic();
+        $new_comic = new Comic();
+
         // volendo potrei pure fa si che alcuni dati siano sempre statici quasiasi cosa invii
         // togliendo dal form in create.blade gli input relativi
         // e sostituendo il link all'array con un risultato fisso
         // es: $newComic->price='20,99$';
-        $newComic->title=$formData['title'];
-        $newComic->description=$formData['description'];
-        $newComic->thumb=$formData['thumb'];
-        $newComic->price=$formData['price'];
-        $newComic->sale_date=$formData['sale_date'];
-        $newComic->series=$formData['series'];
-        $newComic->type=$formData['type'];
-        $newComic->save();
+        $new_comic->title=$formData['title'];
+        $new_comic->description=$formData['description'];
+        $new_comic->thumb=$formData['thumb'];
+        $new_comic->price=$formData['price']+'$';
+        $new_comic->sale_date=$formData['sale_date'];
+        $new_comic->series=$formData['series'];
+        $new_comic->type=$formData['type'];
+
+        // assegno i valori filler del form
+        // (sempre se ho abilitato $fillable dal Model della relativa tabella)
+        // $new_comic->fill($formData);
+
+
+        $new_comic->save();
+
+        // e se volessi riassumere tutto in un comando?
+        // (sempre se ho abilitato $fillable dal Model della relativa tabella)
+        // $new_comic = Comic::create($formData);
+
         // quando hai inviato tutto al db
         //riportami alla pagina principale
         return to_route('comics.index');
@@ -88,11 +111,12 @@ class ComicController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Comic  $comic
-     * @return \Illuminate\Http\Response
+     *
      */
     public function edit(Comic $comic)
     {
         //
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -105,16 +129,30 @@ class ComicController extends Controller
     public function update(Request $request, Comic $comic)
     {
         //
+        $formData = $request->all();
+        $comic->title=$formData['title'];
+        $comic->description=$formData['description'];
+        $comic->thumb=$formData['thumb'];
+        $comic->price=$formData['price'];
+        $comic->sale_date=$formData['sale_date'];
+        $comic->series=$formData['series'];
+        $comic->type=$formData['type'];
+        $comic->update();
+        // quando hai inviato tutto al db
+        //riportami alla pagina principale
+        return to_route('comics.show', $comic->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Comic  $comic
-     * @return \Illuminate\Http\Response
+     *
      */
     public function destroy(Comic $comic)
     {
         //
+        $comic->delete();
+        return to_route('comics.index')->with('message', "il prodotto $comic->title è stato eliminato con successo!");
     }
 }

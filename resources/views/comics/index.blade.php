@@ -21,6 +21,14 @@
         <section class="bg-my-dark">
             {{-- comics card --}}
             <div class="container py-5">
+
+                {{-- notifica di eliminazione --}}
+                @if (session()->has('message'))
+                    <div class="alert alert-success ">
+                        {{session()->get('message')}}
+                    </div>
+                @endif
+
                 {{-- adesso che cambiato le route e ho tralsto tutti i dati di config>comics>comics in db_comics --}}
                 {{-- non ho piu un array associativo importato da un file locale bensì da un db --}}
                 {{-- pertanto dovrò sostituire i collegamenti da $comic['thumb']  a $comic->thumb --}}
@@ -39,6 +47,14 @@
                                         <img src="{{$comic->thumb}}" alt="{{$comic->title}}">
                                     </div>
                                 </a>
+                                {{-- bottone di delete --}}
+                                <form action="{{route('comics.destroy', $comic->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger ">
+                                        Elimina
+                                    </button>
+                                </form>
                                 <div>
                                     <p class="font-my-light text-center pt-3">
                                         {{$comic->series}}

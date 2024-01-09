@@ -78,6 +78,11 @@
                                 </li>
                             </ul>
                         </div>
+                        <a href="{{route('comics.edit', $comic->id)}}">
+                            <button class="btn btn-primary rounded-0">
+                                Modifica
+                            </button>
+                        </a>
                     </div>
                     <div class="text-center pt-5 ">
                         <h3 class=" pb-3">
