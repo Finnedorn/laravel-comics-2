@@ -52,7 +52,7 @@
                                 {{-- laravel mette a disposizione proprio degli strumenti per catalogare un errore per un preciso campo --}}
                                 {{-- questo deve essere inserito sia nel tag di input stesso (@error('nomeinput') is-invalid @enderror) --}}
                                 <label for="title" class="form-label">Titolo del Comic</label>
-                                <input type="text" name="title" id="title" class=" form-control my-1" @error('title') is-invalid @enderror>
+                                <input type="text" name="title" id="title" class="form-control my-1 @error('title') is-invalid @enderror">
                                 {{-- che negli snippets @error('nomeinput') aperti sotto il campo input stesso  --}}
                                 @error('title')
                                     <div class="invalid-feedback">

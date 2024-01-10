@@ -24,15 +24,23 @@ class ComicController extends Controller
      */
     public function index(Request $request):View
     {
+        // per far si che il form di select di ricerca in index funzioni
+        // mi serve di prendere i dati dalla querystring pertanto
+        // all'interno dei parametri della funzione inserirò la Request
         //
+        // se la request contiene una querystring con un valore di search
+        // ovvero il nome del form di ricerca
         if(!empty($request->query('search'))) {
+            // crea una var con quel valore
             $search = $request->query('search');
+            // prendo dal db tutti quegli elementi con type uguale
+            // a quello del valore specificato
             $comics = Comic::where('type', $search)->get();
 
         } else {
+            // altrimenti dammeli tutti
             $comics= Comic::all();
         }
-        $comics= Comic::all();
         return view('comics.index', compact('comics'));
     }
 

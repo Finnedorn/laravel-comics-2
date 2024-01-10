@@ -28,13 +28,14 @@
                         {{session()->get('message')}}
                     </div>
                 @endif
-
+                {{-- form di ricerca collegato al controller index --}}
                 <div>
                     <form action="{{route('comics.index')}}" method="GET">
+                        @csrf
                         <select name="search" id="search">
-                            <option value="">All</option>
-                            <option value="action">Action</option>
-                            <option value="mistery">Mistery</option>
+                            <option value="">-</option>
+                            <option value="comic book">comic book</option>
+                            <option value="graphic novel">graphic novel</option>
                         </select>
                         <button type="submit" class="btn btn-primary">Cerca</button>
                     </form>
@@ -54,15 +55,18 @@
                         <div class="ms-4 pb-4">
                             <div class="card-wrapper">
                                 <div class="position-relative">
-                                    {{-- bottone di delete --}}
                                     <div class=" position-absolute icons-position">
+                                        {{-- bottone di delete --}}
+                                        {{-- è dentro un form in quanto mi serve un form per applicare il metodo delete --}}
                                         <form action="{{route('comics.destroy', $comic->id)}}" method="POST" class="mb-3">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger border-0 rounded-0">
+                                            <button type="submit" class="btn btn-danger border-0 rounded-0 cancel-button"
+                                            data-item-title="{{$comic->title}}">
                                                 <i class="fa-solid fa-trash text-light" style="font-size: 0.8rem"></i>
                                             </button>
                                         </form>
+                                        {{-- bottone di edit --}}
                                         <a href="{{route('comics.edit', $comic->id)}}">
                                             <button class="btn btn-success rounded-0 border-0">
                                                 <i class="fa-solid fa-pen" style="font-size: 0.7rem"></i>
@@ -116,4 +120,5 @@
             </div>
         </section>
     </main>
+  @include('partials.modal_delete');
 @endsection
