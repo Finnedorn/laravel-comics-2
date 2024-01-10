@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 // ma un tipo view
 // inserisco questa dicitura
 use Illuminate\View\View;
-// e a riga 18 inserisco un anuova dicitura specifica per ritornare una view
+//inserisco una nuova dicitura specifica per ritornare una view
+
+// importo le request per poterle utilizzare
+use App\Http\Requests\StoreComicRequest;
+use App\Http\Requests\UpdateComicRequest;
+// inoltre cambio i prodotti delle funzioni store e update da Request a StoreComicRequest e UpdateComicRequest
 
 class ComicController extends Controller
 {
@@ -48,35 +53,22 @@ class ComicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreComicRequest $request)
     {
         // la funzione dd(nomedellavararrayassociativo)
         // mi permette di stampare tutti gli elementi dell'array creato dal form
         // in modo da fare un check di come saranno i dati al momento in cui premerò invia sul form
         // request fa riferimento alla variabile responsabile del pacchetto dati del form
-        // è decretata alla riga 41 e presente come paramtro della funzione store
+        // è decretata alla riga 53 e presente come parametro della funzione store
         // dd($request->all());
-
-
-        // voglio che per alcuni campi siano rispettati dei paratri o dei limiti
-        // (sopratutto che coincidano coi limiti di lunghezze che ho impostato per i vari campi del migration in db)
-        // tramite la funzione validate([]) posso andare a specificare quali limiti impostare
-        // prima di inviare i dati del $formData al db
-        $request->validate([
-            // consulta la sezione Validation di Laravel
-            // ogni campo dev'essere separato da un pipe |
-            'title'=> 'required|min:5|max:255',
-            'thumb'=> 'url',
-            'price'=> 'required|min:1|max:20',
-            'series'=> 'required|min:5|max:30',
-        ]);
 
         // come per i seeder creo un pacchetto che associ
         // ogni elemento dell'array seeder destinato al db
         // ad un elemento dell'array associativo generato dal form ($formData)
-        $formData= $request->all();
+        // validated() è il metodo delle classi Request ce ho importato
+        // dentro alle quali ho settato le validation e relativi messaggi di errore
+        $formData= $request->validated();
         $new_comic = new Comic();
-
         // volendo potrei pure fa si che alcuni dati siano sempre statici quasiasi cosa invii
         // togliendo dal form in create.blade gli input relativi alla relativa key
         // e sostituendo il link all'array con un risultato fisso
@@ -88,17 +80,9 @@ class ComicController extends Controller
         $new_comic->sale_date=$formData['sale_date'];
         $new_comic->series=$formData['series'];
         $new_comic->type=$formData['type'];
-
-        // assegno i valori filler del form
         // (sempre se ho abilitato $fillable dal Model della relativa tabella)
         // $new_comic->fill($formData);
-
-
         $new_comic->save();
-
-        // e se volessi riassumere tutto in un comando?
-        // (sempre se ho abilitato $fillable dal Model della relativa tabella)
-        // $new_comic = Comic::create($formData);
 
         // quando hai inviato tutto al db
         //riportami alla pagina principale
@@ -136,10 +120,10 @@ class ComicController extends Controller
      * @param  \App\Models\Comic  $comic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comic $comic)
+    public function update(UpdateComicRequest $request, Comic $comic)
     {
         //
-        $formData = $request->all();
+        $formData = $request->validated();
         $comic->title=$formData['title'];
         $comic->description=$formData['description'];
         $comic->thumb=$formData['thumb'];

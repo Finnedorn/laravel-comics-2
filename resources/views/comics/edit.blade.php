@@ -17,7 +17,24 @@
         </div>
         <div>
             <div class="container my-5 ">
-
+                {{-- check di errore --}}
+                {{-- in caso di errore di quasiasi tipo... --}}
+                {{-- la variabile $errors è automaticamente associabile da laravel come risultante di un errore --}}
+                {{-- any() è un metodo che designa un qualsiasi elememto sia parte di una variabile --}}
+                @if($errors->any())
+                    {{-- ...redirezionami alla stessa pagina di create ma creami un div... --}}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {{-- ...in cui stamperai una lista di tutti gli elementi di $errors --}}
+                            {{-- il metodo all designa tutti i valori della variabile  --}}
+                            @foreach ($errors->all() as $error)
+                                <li>
+                                    {{$error}}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{route('comics.update', $comic->id)}}" method="POST" >
                     {{-- chiave token di sicurezza di laravel da inserire ogni qualvolta creeremo un form --}}
                     {{-- senza la chiave @csrf laravel non permetterebbe al form di essere inviato dandoti un errore:419 --}}

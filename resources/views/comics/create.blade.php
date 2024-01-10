@@ -53,7 +53,6 @@
                                 {{-- questo deve essere inserito sia nel tag di input stesso (@error('nomeinput') is-invalid @enderror) --}}
                                 <label for="title" class="form-label">Titolo del Comic</label>
                                 <input type="text" name="title" id="title" class=" form-control my-1" @error('title') is-invalid @enderror>
-                                @enderror>
                                 {{-- che negli snippets @error('nomeinput') aperti sotto il campo input stesso  --}}
                                 @error('title')
                                     <div class="invalid-feedback">
@@ -85,6 +84,7 @@
                             <div class="mb-3 ">
                                 <label for="series" class="form-label">Tipo:</label>
                                 <select name="type" id="type" class="form-select" required>
+                                    <option value="all">-</option>
                                     <option value="comic book">comic book</option>
                                     <option value="graphic novel">graphic novel</option>
                                 </select>

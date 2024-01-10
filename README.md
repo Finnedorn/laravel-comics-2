@@ -73,8 +73,8 @@ npm install
 # metodo CRUD (sezione resource controller sulla pagina di laravel)
 
 
-# creo un model e relativi resources-controller-migration-seeder
-php artisan make:model Comic -rcms
+# creo un model e relativi resources-controller-migration-seeder (+Request)
+php artisan make:model Comic -rcms --request
 # aggiungo a routes>web in cima, il link al file controller
 use App\Http\Controllers\NomeController;
 # aggiungo le rotte in routes>web
@@ -88,6 +88,15 @@ php artisan make:controller NomeController --resources
 # controllo le routes per capire se il CRUD è ben impostato
 # (è importante pure per esaminare i nomi delle route oltre che metodi con cui i dati vengono inviati!)
 php artisan route:list --except-vendor
+
+# ---Request (form request validation)
+
+# sono file contenenti apposite classi in cui laravel ci permette di definire la logica
+# dietro la validazione e autorizzazione dei dati di una specifica request avvenuta tramite form
+# php artisan make:request nomecampodirequest+nomecartella+Request
+php artisan make:request StoreComicRequest
+# altro esempio
+php artisan make:request UpdateComicRequest
 
 ---------------
 
@@ -129,5 +138,15 @@ php artisan route:list --except-vendor
 
 
 # creo le views relative
+
+# ---Request (form request validation)
+
+
+# sono file contenenti apposite classi in cui laravel ci permette di definire la logica
+# dietro la validazione e autorizzazione dei dati di una specifica request avvenuta tramite form
+# php artisan make:request nomecampodirequest+nomecartella+Request
+php artisan make:request StoreComicRequest
+# altro esempio
+php artisan make:request UpdateComicRequest
 
 ```
