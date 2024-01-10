@@ -63,7 +63,10 @@ class ComicController extends Controller
         // tramite la funzione validate([]) posso andare a specificare quali limiti impostare
         // prima di inviare i dati del $formData al db
         $request->validate([
+            // consulta la sezione Validation di Laravel
+            // ogni campo dev'essere separato da un pipe |
             'title'=> 'required|min:5|max:255',
+            'thumb'=> 'url',
             'price'=> 'required|min:1|max:20',
             'series'=> 'required|min:5|max:30',
         ]);
@@ -75,7 +78,7 @@ class ComicController extends Controller
         $new_comic = new Comic();
 
         // volendo potrei pure fa si che alcuni dati siano sempre statici quasiasi cosa invii
-        // togliendo dal form in create.blade gli input relativi
+        // togliendo dal form in create.blade gli input relativi alla relativa key
         // e sostituendo il link all'array con un risultato fisso
         // es: $newComic->price='20,99$';
         $new_comic->title=$formData['title'];

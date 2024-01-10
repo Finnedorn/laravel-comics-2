@@ -18,9 +18,15 @@
         <div>
             <div class="container my-5 ">
                 {{-- check di errore --}}
+                {{-- in caso di errore di quasiasi tipo... --}}
+                {{-- la variabile $errors è automaticamente associabile da laravel come risultante di un errore --}}
+                {{-- any() è un metodo che designa un qualsiasi elememto sia parte di una variabile --}}
                 @if($errors->any())
+                    {{-- ...redirezionami alla stessa pagina di create ma creami un div... --}}
                     <div class="alert alert-danger">
                         <ul>
+                            {{-- ...in cui stamperai una lista di tutti gli elementi di $errors --}}
+                            {{-- il metodo all designa tutti i valori della variabile  --}}
                             @foreach ($errors->all() as $error)
                                 <li>
                                     {{$error}}
@@ -42,10 +48,20 @@
                     <div class="d-flex justify-content-center py-3">
                         <div class="pe-5">
                             <div class="mb-3 ">
+                                {{-- e se volessi inserire un messaggio di errore sotto allo specifico campo? --}}
+                                {{-- laravel mette a disposizione proprio degli strumenti per catalogare un errore per un preciso campo --}}
+                                {{-- questo deve essere inserito sia nel tag di input stesso (@error('nomeinput') is-invalid @enderror) --}}
                                 <label for="title" class="form-label">Titolo del Comic</label>
-                                <input type="text" name="title" id="title" class=" form-control my-1">
+                                <input type="text" name="title" id="title" class=" form-control my-1" @error('title') is-invalid @enderror>
+                                @enderror>
+                                {{-- che negli snippets @error('nomeinput') aperti sotto il campo input stesso  --}}
                                 @error('title')
                                     <div class="invalid-feedback">
+                                        {{-- $message è una variabile di laravel che predispone un messaggio scriptato --}}
+                                        {{-- specifico per ogni campo di $request->validate che non è stato rispettato --}}
+                                        {{-- questi messaggi vengono hostati (per default in eng) in lang>en>validation --}}
+                                        {{-- volendo possiamo pure copia/incollare gli elementi di lang>en creando una cartella per ciascuna lingua --}}
+                                        {{-- e sostituendo i messaggi eng con la relativa lingua tradotta --}}
                                         {{$message}}
                                     </div>
                                 @enderror
