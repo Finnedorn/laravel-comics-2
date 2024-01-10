@@ -29,6 +29,17 @@
                     </div>
                 @endif
 
+                <div>
+                    <form action="{{route('comics.index')}}" method="GET">
+                        <select name="search" id="search">
+                            <option value="">All</option>
+                            <option value="action">Action</option>
+                            <option value="mistery">Mistery</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Cerca</button>
+                    </form>
+                </div>
+
                 {{-- adesso che cambiato le route e ho tralsto tutti i dati di config>comics>comics in db_comics --}}
                 {{-- non ho piu un array associativo importato da un file locale bensì da un db --}}
                 {{-- pertanto dovrò sostituire i collegamenti da $comic['thumb']  a $comic->thumb --}}

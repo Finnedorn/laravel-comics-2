@@ -17,9 +17,16 @@ class ComicController extends Controller
      *
      *@return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request):View
     {
         //
+        if(!empty($request->query('search'))) {
+            $search = $request->query('search');
+            $comics = Comic::where('type', $search)->get();
+
+        } else {
+            $comics= Comic::all();
+        }
         $comics= Comic::all();
         return view('comics.index', compact('comics'));
     }
@@ -74,7 +81,7 @@ class ComicController extends Controller
         $new_comic->title=$formData['title'];
         $new_comic->description=$formData['description'];
         $new_comic->thumb=$formData['thumb'];
-        $new_comic->price=$formData['price']+'$';
+        $new_comic->price=$formData['price'];
         $new_comic->sale_date=$formData['sale_date'];
         $new_comic->series=$formData['series'];
         $new_comic->type=$formData['type'];

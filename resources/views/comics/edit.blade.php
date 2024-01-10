@@ -35,7 +35,7 @@
                         <div class="pe-5">
                             <div class="mb-3 ">
                                 <label for="title" class="form-label">Titolo del Comic</label>
-                                {{-- metodo old mi permette nel caso in cui inserisis un parametro non vlaido o lasciasi vuoot di inviare cmq l'update tenendo il vecchio paramtro  --}}
+                                {{-- metodo old mi permette nel caso in cui inserissi un parametro non vlaido o lasciasi vuoot di inviare cmq l'update tenendo il vecchio paramtro  --}}
                                 <input type="text" value="{{old('title', $comic->title)}}" name="title" id="title" class=" form-control my-1">
                             </div>
                             <div class="mb-3 ">
@@ -55,8 +55,11 @@
                                 <input type="text" value="{{old('series', $comic->series)}}" name="series" id="series" class=" form-control my-1">
                             </div>
                             <div class="mb-3 ">
-                                <label for="series" class="form-label">Tipo</label>
-                                <input type="text" value="{{old('type', $comic->type)}}" name="type" id="type" class=" form-control my-1">
+                                <label for="series" class="form-label">Tipo:</label>
+                                <select name="type" id="type" class="form-select" required>
+                                    <option value="comic book" {{old('type', $comic->type =='comic book' ? 'selected' : '')}}>comic book</option>
+                                    <option value="graphic novel" {{old('type', $comic->type =='graphic novel' ? 'selected' : '')}}>graphic novel</option>
+                                </select>
                             </div>
                         </div>
                         <div>

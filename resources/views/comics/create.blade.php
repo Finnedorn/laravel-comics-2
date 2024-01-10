@@ -67,8 +67,11 @@
                                 <input type="text" name="series" id="series" class=" form-control my-1">
                             </div>
                             <div class="mb-3 ">
-                                <label for="series" class="form-label">Tipo</label>
-                                <input type="text" name="type" id="type" class=" form-control my-1">
+                                <label for="series" class="form-label">Tipo:</label>
+                                <select name="type" id="type" class="form-select" required>
+                                    <option value="comic book">comic book</option>
+                                    <option value="graphic novel">graphic novel</option>
+                                </select>
                             </div>
                         </div>
                         <div>
