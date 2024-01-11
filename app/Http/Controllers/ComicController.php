@@ -73,6 +73,7 @@ class ComicController extends Controller
         // come per i seeder creo un pacchetto che associ
         // ogni elemento dell'array seeder destinato al db
         // ad un elemento dell'array associativo generato dal form ($formData)
+        // passo quindi la var request con i dati, ma solo quelli che sono stati validati dalle Request
         // validated() è il metodo delle classi Request ce ho importato
         // dentro alle quali ho settato le validation e relativi messaggi di errore
         $formData= $request->validated();

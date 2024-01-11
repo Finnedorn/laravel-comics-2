@@ -36,7 +36,7 @@ class StoreComicRequest extends FormRequest
         return [
             //
             'title'=> 'required|min:5|max:255',
-            'thumb'=> 'url',
+            'thumb'=> 'url|nullable',
             'price'=> 'required|min:1|max:20',
             'series'=> 'required|min:5|max:30',
             'type'=>'required',

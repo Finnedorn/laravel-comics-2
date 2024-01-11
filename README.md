@@ -73,8 +73,8 @@ npm install
 # metodo CRUD (sezione resource controller sulla pagina di laravel)
 
 
-# creo un model e relativi resources-controller-migration-seeder (+Request)
-php artisan make:model Comic -rcms --request
+# creo un model e relativi resources-controller-migration-seeder (+Requests)
+php artisan make:model Comic -rcms --requests
 # aggiungo a routes>web in cima, il link al file controller
 use App\Http\Controllers\NomeController;
 # aggiungo le rotte in routes>web

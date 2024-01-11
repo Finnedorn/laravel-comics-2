@@ -34,9 +34,13 @@ class UpdateComicRequest extends FormRequest
         // nel caso in cui non mi serivisse alcun parametro dovrò inserire per quella key la validation "nullable"
         // ma in quel caso è importante che key in controller abbia un valore di default settato
         return [
-            //
+            //nota: Rules opera dietro le quinte
+            // ogni qualvolta che mandiamo un mandiamo un pacchetto dati che passa dalla request
+            // questa manda una query al db di mysql confrontando i dati per capire se sono corretti
+            // questo per dire che se i dati che inviamo non corrispondono a quelli dei canoni stabiliti
+            // per il db, potrebbe cmq dare un errore
             'title'=> 'required|min:5|max:255',
-            'thumb'=> 'url',
+            'thumb'=> 'url|nullable',
             'price'=> 'required|min:1|max:20',
             'series'=> 'required|min:5|max:30',
             'type'=>'required',
